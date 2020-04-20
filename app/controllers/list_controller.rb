@@ -13,13 +13,16 @@ class ListController < ApplicationController
 
     if @list.save
       redirect_to controller: :main, action: :main, notice: 'Lista Criada.'
-    else
-      redirect_to :back, notice: 'Não foi possível criar a lista.'
     end
+
   end
 
   def list_params
-    params.require(:list).permit(:name, :description, :private, :user_id)
+    if params[:list]
+      params.require(:list).permit(:name, :description, :private, :user_id)
+    else
+      params.permit(:name, :description, :private, :user_id)
+    end
   end
 
 end

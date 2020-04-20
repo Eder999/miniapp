@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_20_014045) do
+ActiveRecord::Schema.define(version: 2020_04_20_034705) do
 
   create_table "lists", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "description"
     t.boolean "private", default: false
     t.integer "user_id", null: false

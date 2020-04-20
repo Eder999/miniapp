@@ -1,0 +1,36 @@
+Nova lista
+
+</br>
+</br>
+
+<%= form_for(@list, url: 'create') do |f| %>
+
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+  <div class="field">
+    <%= f.label :Nome %>:
+    <%= f.text_field :name %>
+  </div>
+
+  </br>
+
+  <div class="field">
+    <%= f.label :Descrição %>:
+    <%= f.text_field :description %>
+  </div>
+
+  </br>
+
+  <div class="field">
+    <%= f.label :Lista_Privada %>
+    <%= f.check_box :private %>
+  </div>
+
+  </br>
+
+  <div class="actions">
+    <%= f.submit 'Criar Lista' %>
+  </div>
+
+<% end %>

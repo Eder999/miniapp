@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get '/main/main', to: 'main#main'
 
   get '/list/new', to: 'list#new'
+  get '/list/create', to: 'list#create'
   post '/list/create', to: 'list#create'
 
 end
