@@ -1,0 +1,18 @@
+Lista | <%= link_to 'Adicionar', controller: :list, action: :new %>
+
+<div style="margin-left: 10px">
+
+</br>
+
+<% @my_lists.each do |list| %>
+
+  <%= list.name %> |
+  <%= list.description %> |
+  <%= list.private ? 'Privada' : 'Publica' %> |
+  Criada em: <%= list.created_at.strftime("%d-%m-%Y %H:%M") %>
+
+  </br>
+
+<% end %>
+
+</div>

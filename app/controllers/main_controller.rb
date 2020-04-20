@@ -6,6 +6,12 @@ class MainController < ApplicationController
 
   def main
 
+    @my_lists = List.where(user_id: current_user.id)
+
+    @public_lists = List.where(private: false).where.not(user_id: current_user.id)
+
+    #@favorite_lists = List.where(private: false).where.not(user_id: current_user.id)
+
   end
 
 end

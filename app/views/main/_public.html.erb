@@ -1,0 +1,20 @@
+Publica
+
+<div style="margin-left: 10px">
+
+</br>
+
+<% @public_lists.each do |list| %>
+
+  <%= list.name %> |
+  <%= list.description %> |
+  <%= list.private ? 'Privada' : 'Publica' %> |
+  Criada em: <%= list.created_at.strftime("%d-%m-%Y %H:%M") %> |
+  Criada por: <%= list.user.name %>
+
+  </br>
+
+<% end %>
+
+</div>
+
