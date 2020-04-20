@@ -5,6 +5,10 @@ ruby '2.7.1'
 
 gem 'devise'
 
+gem 'jquery-rails'
+
+gem 'link_to_add_fields'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.2.2'
 # Use sqlite3 as the database for Active Record
