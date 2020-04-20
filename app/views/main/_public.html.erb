@@ -14,7 +14,7 @@ Publica
 
   <% list.tasks.where(task_id: nil).each do |task| %>
 
-    <%= render partial: 'task', locals: {t: task} %>
+    <%= render partial: 'task', locals: {t: task, owner: false} %>
 
   <% end %>
 

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   get '/tasks/create', to: 'tasks#create'
   post '/tasks/create', to: 'tasks#create'
+  get '/tasks/close', to: 'tasks#close'
   resources :tasks
 
 end
