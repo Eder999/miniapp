@@ -33,6 +33,12 @@ Nova lista
   </br>
   </br>
 
+  <%= f.fields_for :tasks do |task| %>
+
+    <%= render partial: 'task_fields', locals:{f: task} %>
+
+  <% end %>
+
   <%= link_to_add_fields "Adicionar", f, :tasks %>
 
   </br>

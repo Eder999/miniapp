@@ -6,14 +6,9 @@ class ListsController < ApplicationController
 
   def new
     @list = List.new
-    @list.tasks.build
   end
 
   def create
-    p "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-
-    p list_params
-
     @list = List.new(list_params)
 
     if @list.save
@@ -24,9 +19,9 @@ class ListsController < ApplicationController
 
   def list_params
     if params[:list]
-      params.require(:list).permit(:name, :description, :private, :user_id, tasks_attributes: [:name, :description])
+      params.require(:list).permit(:name, :description, :private, :user_id, tasks_attributes: [:name, :description, :_destroy])
     else
-      params.permit(:name, :description, :private, :user_id, tasks_attributes: [:name, :description])
+      params.permit(:name, :description, :private, :user_id, tasks_attributes: [:name, :description, :_destroy])
     end
   end
 
