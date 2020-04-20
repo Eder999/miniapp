@@ -1,6 +1,6 @@
 Publica
 
-<div style="margin-left: 10px">
+<div style="margin-left: 20px">
 
 </br>
 
@@ -11,6 +11,12 @@ Publica
   <%= list.private ? 'Privada' : 'Publica' %> |
   Criada em: <%= list.created_at.strftime("%d-%m-%Y %H:%M") %> |
   Criada por: <%= list.user.name %>
+
+  <% list.tasks.where(task_id: nil).each do |task| %>
+
+    <%= render partial: 'task', locals: {t: task} %>
+
+  <% end %>
 
   </br>
 

@@ -1,6 +1,6 @@
 Lista | <%= link_to 'Adicionar', controller: :lists, action: :new %>
 
-<div style="margin-left: 10px">
+<div style="margin-left: 20px">
 
 </br>
 
@@ -9,7 +9,14 @@ Lista | <%= link_to 'Adicionar', controller: :lists, action: :new %>
   <%= list.name %> |
   <%= list.description %> |
   <%= list.private ? 'Privada' : 'Publica' %> |
-  Criada em: <%= list.created_at.strftime("%d-%m-%Y %H:%M") %>
+  Criada em: <%= list.created_at.strftime("%d-%m-%Y %H:%M") %> |
+  <%= link_to "Adicionar Tarefa", controller: :tasks, action: :new, list_id: list.id %>
+
+  <% list.tasks.where(task_id: nil).each do |task| %>
+
+    <%= render partial: 'task', locals: {t: task} %>
+
+  <% end %>
 
   </br>
 

@@ -1,0 +1,15 @@
+<div style='margin-left: 20px'>
+
+  <%= t.name %> |
+  <%= t.description %> |
+  <%= t.closed ? 'Fechada' : 'Aberta' %> |
+  Criada em: <%= t.created_at.strftime("%d-%m-%Y %H:%M") %> |
+  <%= link_to "Adicionar Sub Tarefa", controller: :tasks, action: :new, list_id: t.list_id, task_id: t.id %>
+
+  <% t.tasks.each do |task| %>
+
+    <%= render partial: 'task', locals: {t: task} %>
+
+  <% end %>
+
+</div>

@@ -8,7 +8,10 @@ Rails.application.routes.draw do
 
   get '/lists/create', to: 'lists#create'
   post '/lists/create', to: 'lists#create'
-
   resources :lists
+
+  get '/tasks/create', to: 'tasks#create'
+  post '/tasks/create', to: 'tasks#create'
+  resources :tasks
 
 end
