@@ -7,6 +7,7 @@ class List < ActiveRecord::Base
   accepts_nested_attributes_for :tasks, allow_destroy: true, reject_if: :task_name_blank?
 
   validates :name, presence: true
+  validates :user_id, presence: true
 
   private
 
