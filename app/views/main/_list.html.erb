@@ -11,10 +11,11 @@ Lista | <%= link_to 'Adicionar', controller: :lists, action: :new %>
   <%= list.private ? 'Privada' : 'Publica' %> |
   Criada em: <%= list.created_at.strftime("%d-%m-%Y %H:%M") %> |
   <%= link_to "Adicionar Tarefa", controller: :tasks, action: :new, list_id: list.id %>
+  <%= link_to "Favoritar", controller: :user, action: :favorite_list, list_id: list.id %>
 
   <% list.tasks.where(task_id: nil).each do |task| %>
 
-    <%= render partial: 'task', locals: {t: task, owner: true} %>
+    <%= render partial: 'task', locals: {t: task, owner: current_user.id == list.user_id} %>
 
   <% end %>
 

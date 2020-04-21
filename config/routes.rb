@@ -15,4 +15,7 @@ Rails.application.routes.draw do
   get '/tasks/close', to: 'tasks#close'
   resources :tasks
 
+  get '/user/favorite_list', to: 'user#favorite_list'
+  resources :user
+
 end

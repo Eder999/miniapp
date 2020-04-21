@@ -9,12 +9,13 @@ Publica
   <%= list.name %> |
   <%= list.description %> |
   <%= list.private ? 'Privada' : 'Publica' %> |
+  Criada por: <%= list.user.name %> |
   Criada em: <%= list.created_at.strftime("%d-%m-%Y %H:%M") %> |
-  Criada por: <%= list.user.name %>
+  <%= link_to "Favoritar", controller: :user, action: :favorite_list, list_id: list.id %>
 
   <% list.tasks.where(task_id: nil).each do |task| %>
 
-    <%= render partial: 'task', locals: {t: task, owner: false} %>
+    <%= render partial: 'task', locals: {t: task, owner: current_user.id == list.user_id} %>
 
   <% end %>
 
