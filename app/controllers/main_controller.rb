@@ -16,4 +16,14 @@ class MainController < ApplicationController
 
   end
 
+  def verify_new_info
+    @task = Task.all.order(:updated_at).last
+    @msg = ''
+
+    if params[:date].to_time && (@task.updated_at.to_time.round > params[:date].to_time.round)
+      @msg = "A Lista #{@task.list.name} foi atualizada."
+    end
+
+    render json: {date: @task.updated_at.to_time, msg: @msg}
+  end
 end

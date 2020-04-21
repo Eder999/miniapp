@@ -16,3 +16,21 @@
 //= require jquery
 //= require link_to_add_fields
 //= require_tree .
+
+
+function verify_new_info(div_id, date = null){
+  setInterval(function(){
+    $.ajax({
+      type: 'POST',
+      url: '/main/verify_new_info',
+      data: {date: date},
+      cache: false,
+      headers: { 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content') }
+    }).done(function( data ) {
+        date = data.date;
+        if(data.msg != ''){
+          $('#'+div_id).text(data.msg);
+        }
+    });
+  }, 10000);
+}

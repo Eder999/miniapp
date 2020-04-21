@@ -5,6 +5,10 @@ Bem vindo <%= current_user.name %>!
 
 </br>
 </br>
+
+<div id='att_msg'></div>
+
+</br>
 </br>
 
 <%= render partial: 'list' %>
@@ -25,4 +29,8 @@ Bem vindo <%= current_user.name %>!
 </br>
 
 <%= link_to 'Deslogar', destroy_user_session_path, method: :delete %>
+
+<script>
+  verify_new_info('att_msg');
+</script>>
 
