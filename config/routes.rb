@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   root 'index#index'
 
+  get '/index/index', to: 'main#main'
+
   get '/main/main', to: 'main#main'
   post '/main/verify_new_info', to: 'main#verify_new_info'
   resources :main
