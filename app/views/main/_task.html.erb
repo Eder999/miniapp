@@ -1,18 +1,75 @@
-<div style='margin-left: 20px'>
-
-  <%= t.name %> |
-  <%= t.description %> |
-  <%= t.closed ? 'Fechada' : 'Aberta' %> |
-  Criada em: <%= t.created_at.strftime("%d-%m-%Y %H:%M") %>
-  <% if owner && !t.closed %>
-    | <%= link_to "Adicionar Sub Tarefa", controller: :tasks, action: :new, list_id: t.list_id, task_id: t.id %>
-    | <%= link_to "Fechar", controller: :tasks, action: :close, id: t.id %>
-  <% end %>
-
-  <% t.tasks.each do |task| %>
-
-    <%= render partial: 'task', locals: {t: task, owner: owner} %>
-
-  <% end %>
-
+<div id="">
+  <div class="card">
+    <div class="card-header" id="heading_<%= t.id %><%= index %>"
+             data-toggle="collapse"
+             data-target="#collapse_<%= t.id %><%= index %>"
+             aria-expanded="true"
+             aria-controls="collapse_<%= t.id %><%= index %>"
+    >
+      <h5 class="mb-0">
+        <div class='row pointer'>
+          <div class='col-6 col-md-4 col-lg-3 text-truncate'
+               data-toggle='tooltip'
+               data-trigger="click"
+               title='<%= "#{t.name} - " %><%= t.description %>'
+          >
+            <i class="fa fa-list med-icon" aria-hidden="true"></i>
+            <%= t.name %>
+          </div>
+          <div class='col-12 col-md-5 col-lg-3 text-truncate'
+               data-toggle='tooltip'
+               title='Criada em: <%= t.created_at.strftime("%d-%m-%Y %H:%M") %>'
+          >
+              <i class="fa fa-calendar med-icon" aria-hidden="true"></i>
+              <%= t.created_at.strftime("%d-%m-%Y %H:%M") %>
+          </div>
+          <div class='col-6 col-md-3 col-lg-2 text-truncate'
+               data-toggle='tooltip'
+               title='<%= t.closed ? 'Fechada' : 'Aberta' %>'
+          >
+            <% if t.closed %>
+              <i class="fa fa-window-close-o med-icon" aria-hidden="true"></i>
+              Fechada
+            <% else %>
+              <i class="fa fa-window-maximize med-icon" aria-hidden="true"></i>
+              Aberta
+            <% end %>
+          </div>
+          <% if owner && !t.closed %>
+            <div class='col-6 col-md-6 col-lg-2 text-truncate float-right'
+               data-toggle='tooltip'
+               title='Adicionar uma subtarefa a tarefa "<%= t.name %>"'
+            >
+              <%= link_to({controller: :tasks, action: :new, list_id: t.list.id, task_id: t.id}) do %>
+                <i class='fa fa-plus med-icon' aria-hidden='true'></i> Subtarefa
+              <% end %>
+            </div>
+            <div class='col-6 col-md-6 col-lg-2 text-truncate'
+              data-toggle='tooltip'
+              title='Adiciona essta lista as suas favoritas'
+            >
+                <%= link_to({controller: :tasks, action: :close, id: t.id}) do %>
+                  <span class='text-danger'>
+                    <i class='fa fa-close med-icon' aria-hidden='true'></i>
+                    Fechar
+                  </span>
+                <% end %>
+            </div>
+          <% end %>
+        </div>
+      </h5>
+    </div>
+    <div id="collapse_<%= t.id %><%= index %>"
+         class="collapse"
+         aria-labelledby="heading_<%= t.id %><%= index %>"
+         data-parent=""
+    >
+      <div class="card-body <%= bg %>">
+        <% t.tasks.each_with_index do |task, index| %>
+          <%= render partial: 'task', locals: {t: task, owner: owner, index: index, bg: 'bg-secondary'} %>
+        <% end %>
+        <%= 'Essa tarefa não possuí subtarefas' if t.tasks.size == 0 %>
+      </div>
+    </div>
+  </div>
 </div>

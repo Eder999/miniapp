@@ -14,7 +14,6 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to controller: :main, action: :main, notice: 'Tarefa Criada.'
     end
-
   end
 
   def close

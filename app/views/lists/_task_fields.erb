@@ -1,17 +1,21 @@
-<div class="task_fields" style='margin-left: 10px'>
-  <div class="field">
-    <%= f.label :Nome %>
-    <%= f.text_field :name %>
+<div class='row'>
+  <div class='col-sm-6'>
+    <div class="container">
+      <div class="task_fields" style='margin-left: 10px'>
+        <div class="field form-group">
+          <%= f.label :Nome %>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
+        <div class="field form-group">
+          <%= f.label :Descrição %>
+          <%= f.text_field :description, class: 'form-control' %>
+        </div>
+        <%= f.hidden_field :_destroy %>
+        <%= link_to_remove_fields 'Remover', '.task_fields', class: 'btn btn-danger' %>
+        </br>
+        </br>
+      </div>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :Descrição %>
-    <%= f.text_field :description %>
-  </div>
-
-  <%= f.hidden_field :_destroy %>
-  <%= link_to_remove_fields 'Remover', '.task_fields' %>
-
-  </br>
-  </br>
 </div>
+

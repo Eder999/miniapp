@@ -5,7 +5,6 @@ class Task < ActiveRecord::Base
   has_many :tasks
 
   validates :name, presence: true
-  validates :list_id, presence: true
 
   def close
     #fecha tasks filhos

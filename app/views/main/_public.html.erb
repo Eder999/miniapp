@@ -1,27 +1,72 @@
-Publica
-
-<div style="margin-left: 20px">
-
 </br>
-
-<% @public_lists.each do |list| %>
-
-  <%= list.name %> |
-  <%= list.description %> |
-  <%= list.private ? 'Privada' : 'Publica' %> |
-  Criada por: <%= list.user.name %> |
-  Criada em: <%= list.created_at.strftime("%d-%m-%Y %H:%M") %> |
-  <%= link_to "Favoritar", controller: :user, action: :favorite_list, list_id: list.id %>
-
-  <% list.tasks.where(task_id: nil).each do |task| %>
-
-    <%= render partial: 'task', locals: {t: task, owner: current_user.id == list.user_id} %>
-
+<div id='public_lists'>
+  <% @public_lists.each_with_index do |list, index| %>
+    <div class="card">
+      <div class="card-header" id="heading_p<%= index %>"
+               data-toggle="collapse"
+               data-target="#collapse_p<%= index %>"
+               aria-expanded="true"
+               aria-controls="collapse_p<%= index %>"
+      >
+        <h5 class="mb-0">
+          <div class='row pointer'>
+            <div class='col-6 col-md-4 col-lg-3 text-truncate'
+                 data-toggle='tooltip'
+                 data-trigger="click"
+                 title='<%= "#{list.name} - " %><%= list.description %>'
+            >
+              <i class="fa fa-list med-icon" aria-hidden="true"></i>
+              <%= list.name %>
+            </div>
+            <div class='col-6 col-md-2 col-lg-2 text-truncate'
+                 data-toggle='tooltip'
+                 title='<%= list.private ? 'Privada' : 'Publica' %>'
+            >
+              <% if list.private %>
+                <i class="fa fa-eye-slash med-icon" aria-hidden="true"></i>
+                Privada
+              <% else %>
+                <i class="fa fa-eye med-icon" aria-hidden="true"></i>
+                Publica
+              <% end %>
+            </div>
+            <div class='col-12 col-md-6 col-lg-3 text-truncate'
+                 data-toggle='tooltip'
+                 title='Criada em: <%= list.created_at.strftime("%d-%m-%Y %H:%M") %>'
+            >
+                <i class="fa fa-calendar med-icon" aria-hidden="true"></i>
+                <%= list.created_at.strftime("%d-%m-%Y %H:%M") %>
+            </div>
+            <div class='col-6 col-md-6 col-lg-2 text-truncate float-right'
+               data-toggle='tooltip'
+               title='<%= "Criada por: #{list.user.name} #{list.user.last_name}
+                          - #{list.user.description}"
+                      %>'
+            >
+              <i class="fa fa-user med-icon" aria-hidden="true"></i>
+              <%= list.user.name %>
+            </div>
+            <div class='col-6 col-md-6 col-lg-2 text-truncate'
+               data-toggle='tooltip'
+               title='Adiciona essta lista as suas favoritas'
+            >
+                <%= link_to "<i class='fa fa-star med-icon' aria-hidden='true'></i> Favoritar".html_safe, controller: :user, action: :favorite_list, list_id: list.id %>
+            </div>
+          </div>
+        </h5>
+      </div>
+      <div id="collapse_p<%= index %>"
+           class="collapse"
+           aria-labelledby="heading_p<%= index %>"
+           data-parent=""
+      >
+        <div class="card-body bg-info">
+          <% list.tasks.where(task_id: nil).each_with_index do |task, index| %>
+            <%= render partial: 'task', locals: {t: task, owner: current_user.id == list.user_id, index: index, bg: 'bg-primary'} %>
+          <% end %>
+          <%= 'Essa lista não possuí tarefas' if list.tasks.size == 0 %>
+        </div>
+      </div>
+    </div>
   <% end %>
-
-  </br>
-
-<% end %>
-
 </div>
-

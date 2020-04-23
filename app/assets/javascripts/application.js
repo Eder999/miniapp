@@ -34,3 +34,23 @@ function verify_new_info(div_id, date = null){
     });
   }, 10000);
 }
+
+document.addEventListener("turbolinks:load", function() {
+  $('#main_alert').delay(5000).animate({opacity: 0}, 1000, function(){
+    $('#main_alert').css('display', 'none');
+  });
+  $('#main_notice').delay(5000).animate({opacity: 0}, 1000, function(){
+    $('#main_notice').css('display', 'none');
+  });
+  $('div').tooltip({placement: 'bottom', trigger: 'hover'});
+  $('.nav-item').on('click', function(e) {
+      localStorage.setItem('activeTab', $(e.target).attr('href'));
+  });
+  var activeTab = localStorage.getItem('activeTab');
+  if(activeTab){
+      if(activeTab != '/lists/new'){
+        $('#main_page_tabs a[href="' + activeTab + '"]').tab('show');
+      }
+  }
+});
+

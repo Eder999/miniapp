@@ -57,26 +57,25 @@ RSpec.describe User, type: :model do
       #creating first user
       visit '/users/sign_in'
       expect(page).to have_content('Log in')
-      click_link 'Cadastrar'
+      click_link 'Criar Conta'
       expect(page).to have_content('Preencha Seus Dados')
       within('form') do
         fill_in 'user_name', with: 'user1'
         fill_in 'user_last_name', with: 'user1 last name'
         fill_in 'user_email', with: 'user1@test.com'
         fill_in 'user_password', with: 'user1pass'
-        fill_in 'user_password_confirmation', with: 'user1pass'
       end
       click_button 'Cadastrar'
       expect(page).to have_content('Login efetuado com sucesso')
 
       #creating first user public and private lists
-      click_link 'Adicionar'
+      click_link 'Criar Lista'
       within('form') do
         fill_in 'list_name', with: 'public list user1'
       end
       find('input[name="commit"]').click
       expect(page).to have_content('public list user1')
-      click_link 'Adicionar'
+      click_link 'Criar Lista'
       within('form') do
         fill_in 'list_name', with: 'private list user1'
         find('input[name="list[private]"]').click
@@ -87,14 +86,13 @@ RSpec.describe User, type: :model do
       click_link 'Deslogar'
 
       #creating second user
-      click_link 'Cadastrar'
+      click_link 'Criar Conta'
       expect(page).to have_content('Preencha Seus Dados')
       within('form') do
         fill_in 'user_name', with: 'user2'
         fill_in 'user_last_name', with: 'user2 last name'
         fill_in 'user_email', with: 'user2@test.com'
         fill_in 'user_password', with: 'user2pass'
-        fill_in 'user_password_confirmation', with: 'user2pass'
       end
       click_button 'Cadastrar'
       expect(page).to have_content('Login efetuado com sucesso')

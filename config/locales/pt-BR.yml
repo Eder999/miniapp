@@ -1,2 +1,26 @@
 pt-BR:
-  hello: "Bem vindo!"
+  hello: 'Bem vindo!'
+  activerecord:
+    models:
+      user: 'Usuário'
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: ' - é necessário informar um email válido'
+              taken: ' - o email informado já está em uso'
+            name:
+              blank: ' - é necessário informar um nome válido'
+            last_name:
+              blank: ' - é necessário informar um sobrenome válido'
+            password:
+              blank: ' - é necessário informar uma senha válida'
+              too_short: '- sua senha é muito curta'
+    attributes:
+      user:
+        name: 'Nome'
+        last_name: 'Sobronome'
+        password: 'Senha'
+
+

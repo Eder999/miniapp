@@ -5,7 +5,6 @@ DatabaseCleaner.strategy = :truncation
 
 RSpec.describe List, type: :model do
   DatabaseCleaner.clean
-
   user = User.new(
     name: 'name',
     last_name: 'last_name',

@@ -1,30 +1,22 @@
-Nova Tafera
-
-</br>
-</br>
-
-<%= form_for(@task, url: 'create') do |f| %>
-  <%= f.hidden_field :list_id, value: params[:list_id] || @task.list_id %>
-  <%= f.hidden_field :task_id, value: params[:task_id] || @task.task_id %>
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-
-  <div class="field">
-    <%= f.label :Nome %>:
-    <%= f.text_field :name %>
-  </div>
-
-  </br>
-
-  <div class="field">
-    <%= f.label :Descrição %>:
-    <%= f.text_field :description %>
-  </div>
-
-  </br>
-  </br>
-
-  <div class="actions">
-    <%= f.submit 'Criar Tarefa' %>
-  </div>
-
-<% end %>
+<div class="container">
+  <h2>Nova Tarefa</h2></br>
+  <%= form_for(@task, url: 'create') do |f| %>
+    <%= f.hidden_field :list_id, value: params[:list_id] || @task.list_id %>
+    <%= f.hidden_field :task_id, value: params[:task_id] || @task.task_id %>
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <div class="field form-group">
+      <%= f.label :Nome %>:
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+    </br>
+    <div class="field form-group">
+      <%= f.label :Descrição %>:
+      <%= f.text_field :description, class: 'form-control'  %>
+    </div>
+    </br>
+    </br>
+    <div class="actions form-group">
+      <%= f.submit 'Criar Tarefa', class: 'btn btn-primary btn-block' %>
+    </div>
+  <% end %>
+</div>
