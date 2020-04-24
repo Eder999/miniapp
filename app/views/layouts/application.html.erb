@@ -6,6 +6,8 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -14,31 +16,37 @@
   </head>
   <body>
     <% if user_signed_in? %>
-      <nav class="navbar navbar-expand-sm bg-light row">
-        <div class='col-4 col-sm-4'
-             data-toggle="tooltip"
-             title="<%= current_user.description %>"
-        >
-          <i class='fa fa-user med-icon'></i>
-          <%= current_user.name %>
-          <%= current_user.last_name %>
-        </div>
-        <div class='col-4 col-sm-4' align='center'>
-          <%= link_to "<i class='fa fa-home med-icon'></i> Home".html_safe,
-            {controller: :main, action: :main}
-          %>
-        </div>
-        <div class='col-4 col-sm-4'>
-          <%= link_to "<i class='fa fa-sign-out med-icon'></i> Deslogar".html_safe,
-                      destroy_user_session_path,
-                      method: :delete,
-                      class: 'btn btn-danger float-right'
-          %>
-        </div>
-      </nav>
+      <div class="container-fluid">
+        <nav class="navbar bg-light">
+          <div class='container-fluid'>
+            <div class='row fix-width'>
+              <div class='col-4 col-sm-4'
+                   data-toggle="tooltip"
+                   title="<%= current_user.description %>"
+              >
+                <i class='fa fa-user med-icon'></i>
+                <%= current_user.name %>
+                <%= current_user.last_name %>
+              </div>
+              <div class='col-4 col-sm-4' align='center'>
+                <%= link_to "<i class='fa fa-home med-icon'></i> Home".html_safe,
+                  {controller: :main, action: :main}
+                %>
+              </div>
+              <div class='col-4 col-sm-4'>
+                <%= link_to "<i class='fa fa-sign-out med-icon'></i> Deslogar".html_safe,
+                            destroy_user_session_path,
+                            method: :delete,
+                            class: 'btn btn-danger float-right'
+                %>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
     <% end %>
     </br>
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
         <div class="col-sm-12">
           <% if notice || params[:notice] %>
@@ -51,7 +59,7 @@
           <% end %>
         </div>
       </div>
+      <%= yield %>
     </div>
-    <%= yield %>
   </body>
 </html>

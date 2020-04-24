@@ -1,31 +1,29 @@
-<div class="container">
-  <h2>Nova lista</h2>
-  <%= form_for(@list, url: 'create') do |f| %>
-    <%= f.hidden_field :user_id, value: current_user.id %>
-    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-    <div class="field form-group">
-      <%= f.label :Nome %>:
-      <%= f.text_field :name, class: 'form-control' %>
-    </div>
-    <div class="field form-group">
-      <%= f.label :Descrição %>:
-      <%= f.text_field :description, class: 'form-control' %>
-    </div>
-    <div class="field form-group form-check">
-      <label class='form-check-label'>
-        <%= f.check_box :private, class: 'form-check-input' %>
-        <%= f.label :Lista_Privada %>
-      </label>
-    </div>
-    <h3>Tarefas</h3>
-    <%= f.fields_for :tasks do |task| %>
-      <%= render partial: 'task_fields', locals:{f: task} %>
-    <% end %>
-    <%= link_to_add_fields "Adicionar Tarefa", f, :tasks, class: 'btn btn-primary' %>
-    </br>
-    </br>
-    <div class="actions">
-      <%= f.submit 'Criar Lista', class: 'btn btn-primary btn-block' %>
-    </div>
+<h2>Nova lista</h2>
+<%= form_for(@list, url: 'create') do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <div class="field form-group">
+    <%= f.label :Nome %>:
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+  <div class="field form-group">
+    <%= f.label :Descrição %>:
+    <%= f.text_field :description, class: 'form-control' %>
+  </div>
+  <div class="field form-group form-check">
+    <label class='form-check-label'>
+      <%= f.check_box :private, class: 'form-check-input' %>
+      <%= f.label :Lista_Privada %>
+    </label>
+  </div>
+  <h3>Tarefas</h3>
+  <%= f.fields_for :tasks do |task| %>
+    <%= render partial: 'task_fields', locals:{f: task} %>
   <% end %>
-</div>
+  <%= link_to_add_fields "Adicionar Tarefa", f, :tasks, class: 'btn btn-primary' %>
+  </br>
+  </br>
+  <div class="actions">
+    <%= f.submit 'Criar Lista', class: 'btn btn-primary btn-block' %>
+  </div>
+<% end %>

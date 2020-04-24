@@ -15,8 +15,12 @@ class MainController < ApplicationController
   end
 
   def verify_new_info
-    #@task = Task.all.order(:updated_at).last
-    @task = Task.all.joins('INNER JOIN lists ON lists.id = tasks.list_id AND private = false').order(:updated_at).last
+    @task = Task.all.joins("
+              INNER JOIN lists ON
+                lists.id = tasks.list_id AND
+                private = false AND
+                user_id <> #{current_user.id}"
+            ).order(:updated_at).last
 
     @msg = ''
 

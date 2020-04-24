@@ -18,7 +18,7 @@
               <i class="fa fa-list med-icon" aria-hidden="true"></i>
               <%= list.name %>
             </div>
-            <div class='col-6 col-md-2 col-lg-2 text-truncate'
+            <div class='col-6 col-md-2 text-truncate'
                  data-toggle='tooltip'
                  title='<%= list.private ? 'Privada' : 'Publica' %>'
             >
@@ -37,7 +37,7 @@
                 <i class="fa fa-calendar med-icon" aria-hidden="true"></i>
                 <%= list.created_at.strftime("%d-%m-%Y %H:%M") %>
             </div>
-            <div class='col-6 col-md-6 col-lg-2 text-truncate float-right'
+            <div class='col-6 col-lg-1 text-truncate float-right'
                data-toggle='tooltip'
                title='Adicionar uma nova tarefa a lista "<%= list.name %>"'
             >
@@ -45,9 +45,10 @@
                 <i class='fa fa-plus med-icon' aria-hidden='true'></i> Tarefa
               <% end %>
             </div>
-            <div class='col-6 col-md-6 col-lg-2 text-truncate'
+            <div class='col-6 col-lg-2 text-truncate'
               data-toggle='tooltip'
               title='Adiciona essta lista as suas favoritas'
+              align='center'
             >
                 <%= link_to({controller: :user, action: :favorite_list, list_id: list.id}) do %>
                   <i class='fa fa-star med-icon' aria-hidden='true'></i> Favoritar
@@ -63,7 +64,14 @@
       >
         <div class="card-body bg-info">
           <% list.tasks.where(task_id: nil).each_with_index do |task, index| %>
-            <%= render partial: 'task', locals: {t: task, owner: current_user.id == list.user_id, index: index, bg: 'bg-primary'} %>
+            <%= render partial: 'task',
+              locals: {
+                t: task,
+                owner: current_user.id == list.user_id,
+                index: index,
+                bg: 'bg-primary'
+              }
+            %>
           <% end %>
           <%= 'Essa lista não possuí tarefas' if list.tasks.size == 0 %>
         </div>

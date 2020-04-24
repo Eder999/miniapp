@@ -17,7 +17,6 @@
 //= require link_to_add_fields
 //= require_tree .
 
-
 function verify_new_info(div_id, date = null){
   setInterval(function(){
     $.ajax({
