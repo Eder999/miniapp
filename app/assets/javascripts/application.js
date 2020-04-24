@@ -41,10 +41,12 @@ document.addEventListener("turbolinks:load", function() {
   $('#main_notice').delay(5000).animate({opacity: 0}, 1000, function(){
     $('#main_notice').css('display', 'none');
   });
+
   $('div').tooltip({placement: 'bottom', trigger: 'hover'});
   $('.nav-item').on('click', function(e) {
       localStorage.setItem('activeTab', $(e.target).attr('href'));
   });
+
   var activeTab = localStorage.getItem('activeTab');
   if(activeTab){
       if(activeTab != '/lists/new'){

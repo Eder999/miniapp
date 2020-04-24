@@ -2,7 +2,7 @@
 class Task < ActiveRecord::Base
 
   belongs_to :list
-  has_many :tasks
+  has_many :tasks, dependent: :destroy
 
   validates :name, presence: true
 

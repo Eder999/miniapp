@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :main
 
   get '/lists/create', to: 'lists#create'
+  get '/lists/delete', to: 'lists#delete'
   post '/lists/create', to: 'lists#create'
   resources :lists
 

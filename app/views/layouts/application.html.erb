@@ -17,7 +17,7 @@
   <body>
     <% if user_signed_in? %>
       <div class="container-fluid">
-        <nav class="navbar bg-light">
+        <nav class="navbar fixed-top bg-light">
           <div class='container-fluid'>
             <div class='row fix-width'>
               <div class='col-4 col-sm-4'
@@ -34,7 +34,8 @@
                 %>
               </div>
               <div class='col-4 col-sm-4'>
-                <%= link_to "<i class='fa fa-sign-out med-icon'></i> Deslogar".html_safe,
+                <%= link_to "<i class='fa fa-sign-out med-icon'></i>
+                            Deslogar".html_safe,
                             destroy_user_session_path,
                             method: :delete,
                             class: 'btn btn-danger float-right'
@@ -46,15 +47,18 @@
       </div>
     <% end %>
     </br>
+    </br>
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-12">
           <% if notice || params[:notice] %>
+            </br>
             <p id='main_notice' class='notice alert alert-success'>
               <%= notice || params[:notice] %>
             </p>
           <% end %>
           <% if alert %>
+            </br>
             <p id='main_alert' class='alert alert-danger'><%= alert %></p>
           <% end %>
         </div>

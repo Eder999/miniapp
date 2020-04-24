@@ -2,21 +2,24 @@
 <div id='public_lists'>
   <% @public_lists.each_with_index do |list, index| %>
     <div class="card">
-      <div class="card-header" id="heading_p<%= index %>"
-               data-toggle="collapse"
-               data-target="#collapse_p<%= index %>"
-               aria-expanded="true"
-               aria-controls="collapse_p<%= index %>"
-      >
+      <div class="card-header">
         <h5 class="mb-0">
-          <div class='row pointer'>
+          <div class='row'>
             <div class='col-6 col-md-4 col-lg-3 text-truncate'
                  data-toggle='tooltip'
                  data-trigger="click"
                  title='<%= "#{list.name} - " %><%= list.description %>'
             >
-              <i class="fa fa-list med-icon" aria-hidden="true"></i>
-              <%= list.name %>
+              <div class='pointer text-primary'
+                   id="heading_p<%= index %>"
+                   data-toggle="collapse"
+                   data-target="#collapse_p<%= index %>"
+                   aria-expanded="true"
+                   aria-controls="collapse_p<%= index %>"
+              >
+                <i class="fa fa-list med-icon" aria-hidden="true"></i>
+                <%= list.name %>
+              </div>
             </div>
             <div class='col-6 col-md-2 text-truncate'
                  data-toggle='tooltip'
@@ -50,7 +53,14 @@
                data-toggle='tooltip'
                title='Adiciona essta lista as suas favoritas'
             >
-                <%= link_to "<i class='fa fa-star med-icon' aria-hidden='true'></i> Favoritar".html_safe, controller: :user, action: :favorite_list, list_id: list.id %>
+                <%= link_to({controller: :user,
+                             action: :favorite_list,
+                             list_id: list.id
+                            }) do
+                %>
+                  <i class='fa fa-star med-icon' aria-hidden='true'></i>
+                  Favoritar
+                <% end %>
             </div>
           </div>
         </h5>
@@ -67,11 +77,13 @@
                 t: task,
                 owner: current_user.id == list.user_id,
                 index: index,
-                bg: 'bg-primary'
+                bg: 106090
               }
             %>
           <% end %>
-          <%= 'Essa lista não possuí tarefas' if list.tasks.size == 0 %>
+          <span class='text-white font-weight-bold'>
+            <%= 'Essa lista não possuí tarefas' if list.tasks.size == 0 %>
+          </span>
         </div>
       </div>
     </div>

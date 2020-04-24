@@ -2,21 +2,25 @@
 <div id='my_lists'>
   <% @my_lists.each_with_index do |list, index| %>
     <div class="card">
-      <div class="card-header" id="heading<%= index %>"
-               data-toggle="collapse"
-               data-target="#collapse<%= index %>"
-               aria-expanded="true"
-               aria-controls="collapse<%= index %>"
-      >
+      <div class="card-header">
         <h5 class="mb-0">
-          <div class='row pointer'>
+          <div class='row'>
             <div class='col-6 col-md-4 col-lg-3 text-truncate'
                  data-toggle='tooltip'
                  data-trigger="click"
                  title='<%= "#{list.name} - " %><%= list.description %>'
+
             >
-              <i class="fa fa-list med-icon" aria-hidden="true"></i>
-              <%= list.name %>
+              <div class='pointer text-primary'
+                    id="heading<%= index %>"
+                    data-toggle="collapse"
+                    data-target="#collapse<%= index %>"
+                    aria-expanded="true"
+                    aria-controls="collapse<%= index %>"
+              >
+                <i class="fa fa-list med-icon" aria-hidden="true"></i>
+                <%= list.name %>
+              </div>
             </div>
             <div class='col-6 col-md-2 text-truncate'
                  data-toggle='tooltip'
@@ -37,7 +41,7 @@
                 <i class="fa fa-calendar med-icon" aria-hidden="true"></i>
                 <%= list.created_at.strftime("%d-%m-%Y %H:%M") %>
             </div>
-            <div class='col-6 col-lg-1 text-truncate float-right'
+            <div class='col-4 col-lg-1 text-truncate float-right'
                data-toggle='tooltip'
                title='Adicionar uma nova tarefa a lista "<%= list.name %>"'
             >
@@ -45,14 +49,32 @@
                 <i class='fa fa-plus med-icon' aria-hidden='true'></i> Tarefa
               <% end %>
             </div>
-            <div class='col-6 col-lg-2 text-truncate'
+            <div class='col-4 col-sm-3 col-lg-2 text-truncate'
               data-toggle='tooltip'
               title='Adiciona essta lista as suas favoritas'
-              align='center'
+              align=''
             >
-                <%= link_to({controller: :user, action: :favorite_list, list_id: list.id}) do %>
-                  <i class='fa fa-star med-icon' aria-hidden='true'></i> Favoritar
+                <%= link_to({controller: :user,
+                             action: :favorite_list,
+                             list_id: list.id
+                            }) do
+                %>
+                  <i class='fa fa-star med-icon' aria-hidden='true'></i>
+                  Favoritar
                 <% end %>
+            </div>
+            <div class='col-4 col-sm-3 col-lg-1 text-truncate float-right'
+               data-toggle='tooltip'
+               title="Excluir a lista <%= list.name %>"
+            >
+              <span class='text-danger pointer'
+                    data-toggle='modal'
+                    data-target='#deleteModal'
+                    onclick="edit_modal('<%= list.name %>', <%= list.id %>)"
+              >
+                <i class='fa fa-times med-icon' aria-hidden='true'></i>
+                Excluir
+              </span>
             </div>
           </div>
         </h5>
@@ -69,11 +91,13 @@
                 t: task,
                 owner: current_user.id == list.user_id,
                 index: index,
-                bg: 'bg-primary'
+                bg: 106090
               }
             %>
           <% end %>
-          <%= 'Essa lista não possuí tarefas' if list.tasks.size == 0 %>
+          <span class='text-white font-weight-bold'>
+            <%= 'Essa lista não possuí tarefas' if list.tasks.size == 0 %>
+          </span>
         </div>
       </div>
     </div>

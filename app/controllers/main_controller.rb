@@ -19,15 +19,17 @@ class MainController < ApplicationController
               INNER JOIN lists ON
                 lists.id = tasks.list_id AND
                 private = false AND
-                user_id <> #{current_user.id}"
-            ).order(:updated_at).last
-
+                lists.user_id <> #{current_user.id}
+              INNER JOIN list_users ON
+                list_users.list_id = tasks.list_id AND
+                list_users.user_id = #{current_user.id}
+            ").order(:updated_at).last
     @msg = ''
 
     if params[:date].to_time &&
        @task &&
-       (@task.updated_at.to_time.round > params[:date].to_time.round)
-          @msg = "A Lista #{@task.list.name} foi atualizada."
+       (@task.updated_at.to_time.round != params[:date].to_time.round)
+          @msg = "Alguma de suas listas favoritas foi atualizada"
     end
 
     @update_at = @task ? @task.updated_at : ''

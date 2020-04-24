@@ -46,7 +46,7 @@
             </div>
             <div class='col-6 col-md-6 col-lg-2 text-truncate'
               data-toggle='tooltip'
-              title='Adiciona essta lista as suas favoritas'
+              title='Fechar'
             >
                 <%= link_to({controller: :tasks, action: :close, id: t.id}) do %>
                   <span class='text-danger'>
@@ -64,11 +64,20 @@
          aria-labelledby="heading_<%= t.id %><%= index %>"
          data-parent=""
     >
-      <div class="card-body <%= bg %>">
+      <div class="card-body" style="background-color: #<%= bg %>">
         <% t.tasks.each_with_index do |task, index| %>
-          <%= render partial: 'task', locals: {t: task, owner: owner, index: index, bg: 'bg-secondary'} %>
+          <%= render partial: 'task',
+                              locals: {
+                                t: task,
+                                owner: owner,
+                                index: index,
+                                bg: bg.to_i + 250
+                              }
+          %>
         <% end %>
-        <%= 'Essa tarefa não possuí subtarefas' if t.tasks.size == 0 %>
+        <span class='text-white font-weight-bold'>
+          <%= 'Essa tarefa não possuí subtarefas' if t.tasks.size == 0 %>
+        </span>
       </div>
     </div>
   </div>
